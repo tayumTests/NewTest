@@ -1,0 +1,12 @@
+apiVersion: v3.0.0
+kind: Solution
+
+metadata:
+  name: agent-solution
+  description: Simple agent solution for integration testing
+  version: "1.0.0"
+
+type: composite
+
+assets:
+  - ref: ./assets/agent/asset.yaml

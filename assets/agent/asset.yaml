@@ -1,0 +1,54 @@
+apiVersion: v3.0.0
+kind: service
+
+metadata:
+  name: my-agent
+  version: "1.0.0"
+  description: Simple agent for testing!!
+
+type: agent
+
+provides:
+  apis:
+  - name: my-agent
+    kind: a2a
+    ordId: "sap.cadartifact:apiResource:TIMESTAMP:v2"
+
+requires:
+  - name: s4-mcp-server
+    kind: mcp-server
+    ordId: "sap.s4:apiResource:API_PRODUCT_0002_MCP:v1"
+  - name: ariba-sourcing-mcp-server
+    kind: mcp-server
+    ordId: "sap.aribas4:apiResource:sourcing_event_MCP:v1"
+
+container:
+  port: 5000
+  buildPath: .
+
+runtime:
+  type: python
+  version: "3.12"
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "50m"
+  limits:
+    memory: "512Mi"
+    cpu: "200m"
+
+probes:
+  readiness:
+    path: /health/ready
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  liveness:
+    path: /health/live
+    initialDelaySeconds: 15
+    periodSeconds: 10
+  startup:
+    path: /health/live
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    failureThreshold: 30
