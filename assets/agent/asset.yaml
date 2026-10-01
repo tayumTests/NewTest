@@ -1,5 +1,5 @@
 apiVersion: 'asset.sap/v1'
-kind: service
+kind: 'Asset'
 
 metadata:
   name: my-agent
