@@ -1,4 +1,4 @@
-apiVersion: v3.0.0
+apiVersion: 'asset.sap/v1'
 kind: service
 
 metadata:
